@@ -26,24 +26,14 @@ on:
         default: "gki-android14-6.1"
 
 jobs:
-  build-batch-1:
-    name: build-batch-1 (RMX3853, sm7450, main, realme_GT6T.xml, android14, 6.1, ${{ inputs.ksun_branch }})
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - model: RMX3853
-            soc: sm7450
-            branch: main
-            manifest: realme_GT6T.xml
-            android_version: android14
-            kernel_version: "6.1"
+  build-kernel:
+    name: build-kernel (RMX3853, sm7450, android14, 6.1, ${{ inputs.ksun_branch }})
     runs-on: ubuntu-latest
     steps:
       - name: Select Appropriate SusFS Branch
         id: get-susfs-branch
         run: |
-          KERNEL_STRING="${{ matrix.android_version }}-${{ matrix.kernel_version }}"
+          KERNEL_STRING="android14-6.1"
 
           if [[ "$KERNEL_STRING" == "android14-6.1" ]]; then
             SUSFS_BRANCH="${{ inputs.android14-6_1_susfs_branch }}"
@@ -60,18 +50,18 @@ jobs:
       - name: Build Kernel
         uses: WildKernels/OnePlus_KernelSU_SUSFS/.github/actions@main
         with:
-          model: ${{ matrix.model }}
-          soc: ${{ matrix.soc }}
-          branch: ${{ matrix.branch }}
-          manifest: ${{ matrix.manifest }}
-          android_version: ${{ matrix.android_version }}
-          kernel_version: ${{ matrix.kernel_version }}
+          model: RMX3853
+          soc: sm7450
+          branch: oneplus/sm7675
+          manifest: oneplus_nord_4_v.xml
+          android_version: android14
+          kernel_version: "6.1"
           ksun_branch: ${{ inputs.ksun_branch }}
           susfs_branch: ${{ steps.get-susfs-branch.outputs.susfs_branch }}
 
   trigger-release:
     needs:
-      - build-batch-1
+      - build-kernel
     runs-on: ubuntu-latest
     if: ${{ inputs.make_release }}
     env:
@@ -142,7 +132,6 @@ jobs:
               fi
               echo "Uploading $file..."
               gh release upload ${{ env.NEW_TAG }} "$file"
-          done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_TAG: ${{ env.NEW_TAG }}
