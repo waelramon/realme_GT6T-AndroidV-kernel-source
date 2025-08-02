@@ -22,11 +22,12 @@ jobs:
         kernel_version: [6.1]
 
     steps:
-      - name: Checkout
+      - name: Checkout Kernel Source
         uses: actions/checkout@v3
-   - name: Clone Proton Clang Toolchain
-     run: |
-       git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
+
+      - name: Clone Proton Clang Toolchain
+        run: |
+          git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
       - name: Get SUSFS Branch
         id: get-susfs-branch
