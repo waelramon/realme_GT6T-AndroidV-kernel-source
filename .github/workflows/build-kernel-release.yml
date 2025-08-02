@@ -22,16 +22,12 @@ jobs:
         kernel_version: [6.1]
 
     steps:
-      - name: Checkout Kernel Source
+      - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Clone Proton Clang Toolchain
-        run: |
-          git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
       - name: Get SUSFS Branch
         id: get-susfs-branch
-        run: echo "susfs_branch=main" >> $GITHUB_OUTPUT
+        run: echo "susfs_branch=main" >> "$GITHUB_OUTPUT"
 
       - name: Build Kernel
         uses: WildKernels/OnePlus_KernelSU_SUSFS/.github/actions@main
