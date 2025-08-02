@@ -5,7 +5,7 @@ on:
     inputs:
       ksun_branch:
         description: 'KernelSU Branch'
-        default: 'main'
+        default: 'next'   # ← هنا بنستخدم فرع KernelSU Next
         required: false
 
 jobs:
@@ -22,12 +22,12 @@ jobs:
         kernel_version: [6.1]
 
     steps:
-      - name: Checkout
+      - name: Checkout Kernel Source
         uses: actions/checkout@v3
 
       - name: Get SUSFS Branch
         id: get-susfs-branch
-        run: echo "susfs_branch=main" >> "$GITHUB_OUTPUT"
+        run: echo "susfs_branch=main" >> $GITHUB_OUTPUT
 
       - name: Build Kernel
         uses: WildKernels/OnePlus_KernelSU_SUSFS/.github/actions@main
