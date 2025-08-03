@@ -1,16 +1,16 @@
-name: Build realmeGTNeo6_Kernel
+name: Build realmeGT6t_Kernel
 
 on:
   workflow_dispatch:
   
 env:
   RETENTION_COUNT: 5
-  CPU: 'sm7675'
+  CPU: 'sm8635'
   FEIL: 'realme_gt_6t_sukisu'
   CPUD: 'pineapple'
   ANDROID_VERSION: 'android14'
   KERNEL_VERSION: '6.1'
-  KERNEL_NAME: '-android14-SukiSU-Ramon'
+  KERNEL_NAME: '-android14-SukiSU-bale'
   KERNELSU_VARIANT: SukiSU-Ultra
   KERNELSU_VERSION: main
   SUSFS_ENABLED: true
