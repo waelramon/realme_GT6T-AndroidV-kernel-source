@@ -5,12 +5,12 @@ on:
   
 env:
   RETENTION_COUNT: 5
-  CPU: 'sm8635'
+  CPU: 'sm7675'
   FEIL: 'realme_gt_neo6_sukisu'
   CPUD: 'pineapple'
   ANDROID_VERSION: 'android14'
   KERNEL_VERSION: '6.1'
-  KERNEL_NAME: '-android14-SukiSU-bale'
+  KERNEL_NAME: '-android14-SukiSU-Ramon'
   KERNELSU_VARIANT: SukiSU-Ultra
   KERNELSU_VERSION: main
   SUSFS_ENABLED: true
@@ -55,7 +55,7 @@ jobs:
       - name: Initialize repo and sync
         run: |
          mkdir kernel_workspace && cd kernel_workspace
-         repo init -u https://github.com/realme-pineapple-devs/kernel_manifest.git -b refs/heads/realme/${{ env.CPU }} -m ${{ env.FEIL }}.xml --depth=1
+         repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b refs/heads/oneplus/${{ env.CPU }} -m ${{ env.FEIL }}.xml --depth=1
          repo sync
          rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
          rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
