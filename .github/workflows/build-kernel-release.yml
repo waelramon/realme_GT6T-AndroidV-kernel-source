@@ -6,7 +6,7 @@ on:
 env:
   RETENTION_COUNT: 5
   CPU: 'sm7675'
-  FEIL: 'realme_gt_neo6_sukisu'
+  FEIL: 'oneplus_nord_4_v'
   CPUD: 'pineapple'
   ANDROID_VERSION: 'android14'
   KERNEL_VERSION: '6.1'
